@@ -1,0 +1,18 @@
+{
+    "darkMode": "Dark Mode",
+    "language": "Language",
+    "logout": "Log Out",
+    "dashboard": "Dashboard",
+    "search": "Search",
+    "notification": "Notification",
+    "staffManagement": "Staff Management",
+    "staffs": "Staff",
+    "products": "Products",
+    "customers": "Customers",
+    "profits": "Profits",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "actions": "Actions",
+    "role": "Role"
+}
