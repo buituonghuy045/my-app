@@ -130,7 +130,7 @@ export default function MonthlyIncomeChart() {
     if (!chartData) return <div className="h-64 flex items-center justify-center text-gray-500 font-medium">Chưa có dữ liệu để hiển thị</div>;
 
     return (
-        <div className="max-w-4xl w-xl mx-auto h-100 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+        <div className="w-full mx-auto h-100 p-6 bg-white rounded-xl shadow-md border border-gray-100">
             <Line options={options} data={chartData} />
         </div>
     );

@@ -72,6 +72,41 @@ export default function CustomerManagementPage() {
             }
         });
     };
+    const handleExportCSV = () => {
+        if (!data || data.length === 0) {
+            messageApi.warning(t('Không có dữ liệu để xuất!'));
+            return;
+        }
+
+        const headers = ["ID", "Ngày đăng ký", "Họ Tên", "Email", "Giới tính", "Chi tiêu"];
+
+        const csvRows = data.map((customer: any) => {
+            return [
+                customer.id,
+                customer.date,
+                `"${customer.full_name || ''}"`,
+                customer.email,
+                customer.gender,
+                customer.spending
+            ].join(",");
+        });
+
+        const csvString = [headers.join(","), ...csvRows].join("\n");
+
+        const blob = new Blob(["\uFEFF" + csvString], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+
+        link.setAttribute("download", `danh_sach_khach_hang_${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        link.click();
+
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        messageApi.success("Đã xuất file CSV thành công!");
+    };
 
     if (!currentUserRole || isPending) {
         return <div className="p-10 text-center text-xl font-semibold">{t('customerTable.loading')}</div>;
@@ -125,6 +160,7 @@ export default function CustomerManagementPage() {
                 columns={columns}
                 onAdd={handleOpenAdd}
                 role={currentUserRole}
+                handleExportCSV={handleExportCSV}
             />
 
             <GenericModal

@@ -4,6 +4,7 @@ import GenderCustomerChart from "@/components/common/GenderCustomerChart";
 import Block from "@/components/dashboard/Block";
 import { useTranslation } from "react-i18next";
 import MonthlyIncomeChart from "@/components/common/MonthlyIncomeChart";
+import TopCustomerChart from "@/components/common/TopCustomerChart";
 
 export default function AdminPage() {
     const { data, isPending, isError, error } = useCustomerData();
@@ -27,11 +28,11 @@ export default function AdminPage() {
     return (
         <div>
             <Block />
-            <div className='flex items-baseline-last gap-2 mt-10'>
-                <MonthlyIncomeChart />
+            <div className='flex flex-col gap-4 mt-10'>
                 <GenderCustomerChart />
+                <TopCustomerChart />
+                <MonthlyIncomeChart />
             </div>
-
         </div>
     );
 }

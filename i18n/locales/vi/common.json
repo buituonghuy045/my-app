@@ -13,6 +13,7 @@
     "customers": "Khách hàng",
     "profits": "Lợi nhuận",
     "add": "Thêm",
+    "export": "Xuất file",
     "staffTable": {
         "id": "Mã NV",
         "avatar": "Hình đại diện",
@@ -46,6 +47,7 @@
         "female": "nữ",
         "date": "Ngày",
         "spending": "Chi tiêu",
+        "action": "Thao tác",
         "deleteTitle": "Xóa khách hàng",
         "deleteDesc": "Bạn có chắc chắn muốn xóa khách hàng này không?",
         "yes": "Có",

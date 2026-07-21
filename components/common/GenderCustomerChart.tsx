@@ -122,7 +122,7 @@ export default function GenderCustomerChart() {
     if (isError) return <div className="h-64 flex items-center justify-center text-red-500">Lỗi tải dữ liệu biểu đồ</div>;
     if (!chartData) return <div className="h-64 flex items-center justify-center text-gray-500">Không có dữ liệu hợp lệ để vẽ biểu đồ</div>;
     return (
-        <div className="max-w-4xl w-xl mx-auto h-100 bg-white rounded-xl shadow-md">
+        <div className="w-full mx-auto h-100 bg-white rounded-xl shadow-md">
             <Bar options={options} data={chartData} />
         </div>
     )

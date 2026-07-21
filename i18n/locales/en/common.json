@@ -13,6 +13,7 @@
     "customers": "Customers",
     "profits": "Profits",
     "add": "Add",
+    "export": "Export",
     "staffTable": {
         "id": "ID",
         "avatar": "Avatar",
