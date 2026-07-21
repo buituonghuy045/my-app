@@ -15,8 +15,9 @@ export default function LinkItem({ menuList }: LinkProps) {
             {menuList.map((menu) => {
                 const Icon = menu.icon;
                 return (
+                    // eslint-disable-next-line react/jsx-key
                     <Link
-                        key={menu.id}
+                        key={menu.href}
                         href={menu.href}
                         className={`
                                 sidebar-items

@@ -2,18 +2,23 @@
 import "@/styles/sidebar.css"
 import ToggleTheme from '../common/ToggleTheme';
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { menus } from "@/data/sidebarMenus";
 import LinkItem from "../common/LinkItem";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../common/LanguageSwitcher";
+import SearchModal from "../common/SearchModal";
 
 export default function Sidebar() {
     const { t } = useTranslation();
     const [role, setRole] = useState("");
+    const searchModalRef = useRef<HTMLDialogElement>(null);
     const menuList = menus.filter(
         menu => menu.role === role
     );
+    const handleOpenSearch = () => {
+        searchModalRef.current?.showModal();
+    };
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -22,11 +27,23 @@ export default function Sidebar() {
     return (
         <div className="col-span-2 sidebar h-screen sticky top-0 flex flex-col bg-base-300 text-base-content">
             {/* Avatar */}
+            <SearchModal dialogRef={searchModalRef} />
             <div className='flex flex-col items-center gap-4 mt-10 pb-2 border-b-2 border-base-100'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-18 text-center ">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
                 <h1 className="sidebar-title text-base-content">{role}</h1>
+            </div>
+            <div className="px-4 mt-4">
+                <button
+                    onClick={handleOpenSearch}
+                    className="btn w-full flex justify-start gap-4 bg-base-100 border-2 border-base-200 hover:border-info text-gray-500 text-2xl py-2"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    <span>Search... </span>
+                </button>
             </div>
             {/*Menu*/}
             <div className="flex flex-col gap-4 flex-1 px-4 mt-6">

@@ -2,20 +2,25 @@
 import { useState } from "react";
 import { users } from "@/data/users";
 import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
   const router = useRouter();
-  {/*input*/ }
+
+  // input
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
-  {/*loading*/ }
+
+  // loading
   const [loading, setLoading] = useState(false);
-  {/*error*/ }
+
+  // error
   const [errors, setErrors] = useState({
     username: "",
     password: "",
   });
+
   const handleLogin = async () => {
     const newErrors = {
       username: "",
@@ -39,6 +44,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const user = users.find(
         (u) =>
           u.username === form.username &&
@@ -46,24 +52,23 @@ export default function LoginPage() {
       );
 
       if (!user) {
-        alert("Wrong usernam or password");
+        alert("Wrong username or password");
         return;
       }
 
       localStorage.setItem("role", user.role);
       localStorage.setItem("username", user.username);
 
-      router.push(
-        user.role === "ADMIN"
-          ? "/admin/dashboard"
-          : "/staff/dashboard"
-      );
-
+      if (user.role === "ADMIN") {
+        router.push("/admin")
+      }
+      else if (user.role === "STAFF") {
+        router.push("/staff");
+      }
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="login-box bg-base-100 max-w-7xl mx-auto mt-40 border-2 border-base-300">
       <h1 className="login-title text-base-content">Login</h1>
@@ -74,7 +79,11 @@ export default function LoginPage() {
           handleLogin();
         }}
       >
-        <input id="account" type="text" placeholder="Username" className="input-field border-2 border-base-300"
+        <input
+          id="account"
+          type="text"
+          placeholder="Username"
+          className="input-field border-2 border-base-300"
           value={form.username}
           onChange={(e) => {
             setForm({
@@ -86,15 +95,19 @@ export default function LoginPage() {
               ...errors,
               username: "",
             });
-          }} />
-        {
-          errors.username && (
-            <p className="text-red-500">
-              {errors.username}
-            </p>
-          )
-        }
-        <input id="pass" type="password" placeholder="Password" className="input-field border-2 border-base-300"
+          }}
+        />
+        {errors.username && (
+          <p className="text-red-500">
+            {errors.username}
+          </p>
+        )}
+
+        <input
+          id="pass"
+          type="password"
+          placeholder="Password"
+          className="input-field border-2 border-base-300"
           value={form.password}
           onChange={(e) => {
             setForm({
@@ -106,14 +119,14 @@ export default function LoginPage() {
               ...errors,
               password: "",
             });
-          }} />
-        {
-          errors.password && (
-            <p className="text-red-500">
-              {errors.password}
-            </p>
-          )
-        }
+          }}
+        />
+        {errors.password && (
+          <p className="text-red-500">
+            {errors.password}
+          </p>
+        )}
+
         <button
           type="submit"
           className="btn btn-error login-button"
@@ -123,5 +136,5 @@ export default function LoginPage() {
         </button>
       </form>
     </div>
-  )
+  );
 }

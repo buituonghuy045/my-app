@@ -3,51 +3,53 @@ import { SidebarMenu } from "@/types/sidebarMenus";
 import {
     HomeIcon,
     BellIcon,
-    MagnifyingGlassIcon,
+    ArchiveBoxIcon,
+    UserGroupIcon,
+    UserIcon,
 }
     from "@heroicons/react/24/outline";
 
 export const menus: SidebarMenu[] = [
     {
-        id: 1,
-        title: "search",
-        href: "/admin/search",
-        role: "ADMIN",
-        icon: MagnifyingGlassIcon,
-    },
-    {
-        id: 2,
         title: "dashboard",
         href: "/admin/dashboard",
         role: "ADMIN",
         icon: HomeIcon,
     },
     {
-        id: 3,
-        title: "notification",
-        href: "/admin/notification",
+        title: "staffManagement",
+        href: "/admin/staffs",
         role: "ADMIN",
-        icon: BellIcon,
+        icon: UserGroupIcon
     },
     {
-        id: 4,
-        title: "search",
-        href: "/staff/search",
-        role: "STAFF",
-        icon: MagnifyingGlassIcon,
+        title: "productManagement",
+        href: "/admin/products",
+        role: "ADMIN",
+        icon: ArchiveBoxIcon
     },
     {
-        id: 5,
+        title: "customerManagement",
+        href: "/admin/customers",
+        role: "ADMIN",
+        icon: UserIcon,
+    },
+    {
         title: "dashboard",
         href: "/staff/dashboard",
         role: "STAFF",
         icon: HomeIcon,
     },
     {
-        id: 6,
-        title: "notification",
-        href: "/staff/notification",
+        title: "productList",
+        href: "/staff/products",
         role: "STAFF",
-        icon: BellIcon,
+        icon: ArchiveBoxIcon
+    },
+    {
+        title: "customerManagement",
+        href: "/staff/customers",
+        role: "STAFF",
+        icon: UserIcon,
     },
 ]

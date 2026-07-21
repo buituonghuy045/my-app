@@ -3,4 +3,5 @@ export interface Staff {
     name: string;
     role: string;
     email: string;
+    avatar: string;
 }

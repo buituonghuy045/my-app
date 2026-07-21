@@ -1,7 +1,12 @@
 import { useTranslation } from "react-i18next";
-
+import { staffs } from "@/data/staffs";
+import { products } from "@/data/products";
+import { useDataList } from "@/app/hooks/use-dataList";
 export default function Block() {
     const { t } = useTranslation();
+    const { data, isPending, isError, error } = useDataList();
+    if (isPending) return <p>{t('customerTable.loading')}</p>
+    if (isError) return <p>{t('customerTable.error')} : {error.message}</p>
     return (
         <div className="grid grid-cols-4 gap-6 mx-15 mt-10">
 
@@ -12,8 +17,8 @@ export default function Block() {
                     </svg>
                 </div>
                 <div className="col-span-2 flex flex-col gap-2 p-2">
-                    <p className="text-bold text-3xl text-white m-0">{t("staffs")}</p>
-                    <p className="text-bold text-4xl text-white m-0">100</p>
+                    <p className="text-bold text-3xl text-white m-0">{t("staff")}</p>
+                    <p className="text-bold text-4xl text-white m-0">{staffs.length}</p>
                 </div>
             </div>
             <div className="grid grid-cols-3 bg-[#00bcd7] rounded">
@@ -25,7 +30,7 @@ export default function Block() {
                 </div>
                 <div className="col-span-2 flex flex-col gap-2 p-2">
                     <p className="text-bold text-3xl text-white m-0">{t("products")}</p>
-                    <p className="text-bold text-4xl text-white m-0">10</p>
+                    <p className="text-bold text-4xl text-white m-0">{products.length}</p>
                 </div>
             </div>
             <div className="grid grid-cols-3 bg-[#8dc64a] rounded">
@@ -37,7 +42,7 @@ export default function Block() {
                 </div>
                 <div className="col-span-2 flex flex-col gap-2 p-2">
                     <p className="text-bold text-3xl text-white m-0">{t("customers")}</p>
-                    <p className="text-bold text-4xl text-white m-0">10</p>
+                    <p className="text-bold text-4xl text-white m-0">{data.length}</p>
                 </div>
             </div>
             <div className="grid grid-cols-3 bg-[#fc9401] rounded">
